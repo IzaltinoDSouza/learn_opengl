@@ -14,7 +14,10 @@ class Window
 public:
 	void create(const char * title,size_t width,size_t height)
 	{
-		glfwInit();
+		if(!glfwInit()){
+			std::cout << "Failed to create GLFW\n";
+			exit(-1);
+		}
 		
 		//configure opengl version
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR,GlobalSettings::opengl_major_version);
@@ -24,7 +27,7 @@ public:
 		m_window = glfwCreateWindow(width,height,title,NULL,NULL);
 		if(!m_window)
 		{
-			std::cout << "Failed to create GLFW window" << std::endl;
+			std::cout << "Failed to create GLFW window\n";
 			glfwTerminate();
 			exit(-1);
 		}
